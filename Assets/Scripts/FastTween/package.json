@@ -1,0 +1,8 @@
+{
+    "name": "com.solenius.fasttween",
+    "version": "1.0.0",
+    "displayName": "FastTween",
+    "description": "Tweening library for Unity",
+    "licensesUrl": "https://github.com/Solenius/FastTween/blob/master/LICENSE",
+    "licence": "MIT"
+  } 
