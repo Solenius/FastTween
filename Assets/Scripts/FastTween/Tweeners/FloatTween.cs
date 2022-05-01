@@ -49,6 +49,11 @@ namespace FastTween
             this.onUpdate += onUpdate;
         }
 
+        IDisposable ITween.ToDisposable()
+        {
+            return new DisposableTween(this);
+        }
+
         public void OnUpdate(float deltaTime)
         {
             float value = descriptor.Update(deltaTime);
