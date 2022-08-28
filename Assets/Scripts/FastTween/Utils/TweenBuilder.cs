@@ -1,4 +1,6 @@
 using System;
+using System.Threading;
+using UnityEngine;
 
 namespace FastTween
 {
@@ -39,6 +41,21 @@ namespace FastTween
         {
             m_target.SetEasingMethod(easing);
             return this;
+        }
+
+        public IObservable<bool> ToObservable(UpdateType update = UpdateType.Update, bool realTime = false, bool cancelOnUnsubscribe = true)
+        {
+            return new ObservableTween(m_target, update, realTime, cancelOnUnsubscribe);
+        }
+
+        public CustomYieldInstruction ToYieldInstruction(UpdateType update = UpdateType.Update, bool realTime = false)
+        {
+            return new YieldableTween(m_target, TweenController.Instance, update, realTime, CancellationToken.None);
+        }
+
+        public CustomYieldInstruction ToYieldInstruction(CancellationToken cancel, UpdateType update = UpdateType.Update, bool realTime = false)
+        {
+            return new YieldableTween(m_target, TweenController.Instance, update, realTime, cancel);
         }
 
         public ITween Create()
@@ -96,6 +113,21 @@ namespace FastTween
         {
             m_target.SetEasingMethod(easing);
             return this;
+        }
+
+        public IObservable<T> ToObservable(UpdateType update = UpdateType.Update, bool realTime = false, bool cancelOnUnsubscribe = true)
+        {
+            return new ObservableTween<T>(m_target, update, realTime, cancelOnUnsubscribe);
+        }
+
+        public CustomYieldInstruction ToYieldInstruction(UpdateType update = UpdateType.Update, bool realTime = false)
+        {
+            return new YieldableTween(m_target, TweenController.Instance, update, realTime, CancellationToken.None);
+        }
+
+        public CustomYieldInstruction ToYieldInstruction(CancellationToken cancel, UpdateType update = UpdateType.Update, bool realTime = false)
+        {
+            return new YieldableTween(m_target, TweenController.Instance, update, realTime, cancel);
         }
 
         public ITween<T> Create()
