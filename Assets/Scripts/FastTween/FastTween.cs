@@ -4,8 +4,8 @@ namespace FastTween
 {
     public static class Tween
     {
-        private static TweenBuilder<float> s_valueTweenBuilder = new TweenBuilder<float>();
-        private static TweenBuilder s_tweenBuilder = new TweenBuilder();
+        private static readonly TweenBuilder<float> s_valueTweenBuilder = new TweenBuilder<float>();
+        private static readonly TweenBuilder s_tweenBuilder = new TweenBuilder();
 
         public static TweenBuilder<float> CreateValueTween(float from, float to, float duration)
         {
