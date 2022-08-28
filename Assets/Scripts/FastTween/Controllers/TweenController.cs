@@ -22,7 +22,7 @@ namespace FastTween
                 if (s_instance == null)
                 {
                     GameObject gameObject = new GameObject("TweenController");
-                    DontDestroyOnLoad(gameObject);
+                    gameObject.hideFlags = HideFlags.HideAndDontSave;
                     s_instance = gameObject.AddComponent<TweenController>();
                 }
 
