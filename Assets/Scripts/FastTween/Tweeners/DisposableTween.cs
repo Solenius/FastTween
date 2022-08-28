@@ -10,7 +10,12 @@ namespace FastTween
         public DisposableTween(ITween tween)
         {
             m_tween = tween ?? throw new ArgumentNullException(nameof(tween));
+            m_tween.SetOnComplete(OnTweenCompleted);
+            m_tween.SetOnCancel(OnTweenCanceled);
         }
+
+        private void OnTweenCompleted() => m_disposed = true;
+        private void OnTweenCanceled() => m_disposed = true;
 
         public void Dispose()
         {
