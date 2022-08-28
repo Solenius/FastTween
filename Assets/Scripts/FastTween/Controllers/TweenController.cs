@@ -6,7 +6,7 @@ namespace FastTween
 {
     internal partial class TweenController : MonoBehaviour
     {
-        private uint m_counter;
+        private long m_counter;
         private bool m_updating;
         private readonly List<ITween> m_cancelList = new List<ITween>();
         private readonly BufferCollection<FloatTween> m_floatTweenBuffers = new BufferCollection<FloatTween>();
@@ -131,10 +131,16 @@ namespace FastTween
 
         private long CreateUniqueId(UpdateType update, bool realtime)
         {
+            // FORMAT
+            // 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000
+            // | Realtime (1 = true, 0 false)
+            //  | Reserved
+            //   || Update mode
+            //      -> Rest are for counter
             long id = 0L;
             id |= realtime ? 1L << 63 : 0L;
             id |= 1L << 62;
-            id |= (long)update << 32;
+            id |= (long)update << 60;
             id |= m_counter++;
             return id;
         }
@@ -142,7 +148,7 @@ namespace FastTween
         private (UpdateType updateType, bool realTime) GetInfo(long id)
         {
             bool realtime = (id >> 63) == 1;
-            UpdateType updateType = (UpdateType)((int)(id >> 32) & 0x3FFFFFFF);
+            UpdateType updateType = (UpdateType)((int)(id >> 60) & 0x3);
             return (updateType, realtime);
         }
     }
