@@ -4,11 +4,11 @@ namespace FastTween
 {
     internal class BufferCollection<T>
     {
-        public readonly TweenBuffer<T> scaledUpdateBuffer = new TweenBuffer<T>(0, 1024);
-        public readonly TweenBuffer<T> unscaledUpdateBuffer = new TweenBuffer<T>(0, 1024);
-        public readonly TweenBuffer<T> scaledLateUpdateBuffer = new TweenBuffer<T>(0, 1024);
-        public readonly TweenBuffer<T> unscaledLateUpdateBuffer = new TweenBuffer<T>(0, 1024);
-        public readonly TweenBuffer<T> fixedUpdateBuffer = new TweenBuffer<T>(0, 1024);
+        public readonly TweenBuffer<T> scaledUpdateBuffer = new TweenBuffer<T>(0, 16384);
+        public readonly TweenBuffer<T> unscaledUpdateBuffer = new TweenBuffer<T>(0, 16384);
+        public readonly TweenBuffer<T> scaledLateUpdateBuffer = new TweenBuffer<T>(0, 16384);
+        public readonly TweenBuffer<T> unscaledLateUpdateBuffer = new TweenBuffer<T>(0, 16384);
+        public readonly TweenBuffer<T> fixedUpdateBuffer = new TweenBuffer<T>(0, 16384);
 
         public void AddTween(ref T tween, UpdateType update, bool realTime)
         {
